@@ -1,0 +1,40 @@
+GET http://localhost:8082/
+Authorization: OpenSesame
+###
+GET http://localhost:8082/currencies
+###
+GET http://localhost:8082/currencies/usd
+###
+GET http://localhost:8082/currencies?min_value=0.001
+###
+GET http://localhost:8082/users
+Authorization: OpenSesame
+###
+GET http://localhost:8082/users/6607d086-7159-4c26-beb1-280c9f9cbf35
+Authorization: OpenSesame
+###
+GET http://localhost:8082/users/5
+###
+GET http://localhost:8082/users/search?gender=5
+###
+GET http://localhost:8082/users/search?age=male
+Authorization: OpenSesame
+###
+GET http://localhost:8082/users/search?gender=female&age=49
+Authorization: OpenSesame
+###
+GET http://localhost:8082/users/search
+###
+POST http://localhost:8082/blogs/new
+Content-Type: application/json
+
+{
+    "title": "Australia",
+    "content": "Australia is a country and continent surrounded by the Indian and Pacific oceans. Its major cities – Sydney, Brisbane, Melbourne, Perth, Adelaide – are coastal. Its capital, Canberra, is inland. The country is known for its Sydney Opera House, the Great Barrier Reef, a vast interior desert wilderness called the Outback, and unique animal species like kangaroos and duck-billed platypuses.",
+    "author": ["James", "Giovanni"],
+    "publishedAt": null
+}
+###
+GET http://localhost:8082/blogs
+###
+GET http://localhost:8082/blogs/670809ec8ba1533d1b2579z5
