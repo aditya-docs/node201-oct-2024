@@ -29,12 +29,20 @@ POST http://localhost:8082/blogs/new
 Content-Type: application/json
 
 {
-    "title": "Australia",
-    "content": "Australia is a country and continent surrounded by the Indian and Pacific oceans. Its major cities – Sydney, Brisbane, Melbourne, Perth, Adelaide – are coastal. Its capital, Canberra, is inland. The country is known for its Sydney Opera House, the Great Barrier Reef, a vast interior desert wilderness called the Outback, and unique animal species like kangaroos and duck-billed platypuses.",
-    "author": ["James", "Giovanni"],
-    "publishedAt": null
+    "title": "Pakistan"
 }
 ###
 GET http://localhost:8082/blogs
 ###
-GET http://localhost:8082/blogs/670809ec8ba1533d1b2579z5
+GET http://localhost:8082/blogs/670a8ef0448db75f1cde7895
+###
+PATCH http://localhost:8082/blogs/670a900b80d7dd8c27e49c47
+Content-Type: application/json
+
+{
+    "content": "India is a very diverse country",
+    "author": ["Sachin"]
+}
+
+###
+DELETE http://localhost:8082/blogs/670a9f51435f1bbf4db35ada
