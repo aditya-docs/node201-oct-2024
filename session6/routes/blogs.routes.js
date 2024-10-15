@@ -5,13 +5,14 @@ const {
   getBlogById,
   updateBlogById,
   deleteBlogById,
+  searchBlogs,
 } = require("../controllers/blogs.controllers");
 const pathValidator = require("../middlewares/pathValidator");
 const { blogIdSchema } = require("../validations/blogs.validations");
 
 router.post("/new", createNewBlog);
 router.get("/", getAllBlogs);
-
+router.get("/search", searchBlogs);
 // router.get("/:blogId", getBlogById);
 // router.patch("/:blogId", updateBlogById);
 // router.delete("/:blogId", deleteBlogById);

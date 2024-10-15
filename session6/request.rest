@@ -29,12 +29,12 @@ POST http://localhost:8082/blogs/new
 Content-Type: application/json
 
 {
-    "title": "Sri Lanka",
-    "content": "Sri Lanka is a beautiful island",
+    "title": "mongolia travel blog",
+    "content": "Mongolia is a beautiful country",
     "author": [
         {
-            "fullName": "Kumar Sangakkara", 
-            "email": "kumars@gmail.com"
+            "fullName": "genghis khan", 
+            "email": "genghis@gov.mo"
         }
     ]
 }
@@ -53,3 +53,11 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:8082/blogs/670a9f51435f1bbf4db35ada
+###
+GET http://localhost:8082/blogs/search?title=travel%20blog
+###
+GET http://localhost:8082/blogs/search?author=srt@gmail.com
+###
+GET http://localhost:8082/blogs/search?title=in&author=srt@gmail.com
+###
+GET http://localhost:8082/blogs/search

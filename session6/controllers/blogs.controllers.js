@@ -1,8 +1,9 @@
-const Blog = require("../models/blog.model");
+const BlogService = require("../services/blogs.service");
+const BlogServiceInstance = new BlogService();
 
 const createNewBlog = async (req, res) => {
   try {
-    res.status(201).send(await Blog.create(req.body));
+    res.status(201).send(await BlogServiceInstance.create(req.body));
   } catch (error) {
     if (error.name === "ValidationError")
       return res.status(400).send({ message: error.message });
@@ -16,7 +17,7 @@ const createNewBlog = async (req, res) => {
 
 const getAllBlogs = async (req, res) => {
   try {
-    res.send(await Blog.find());
+    res.send(await BlogServiceInstance.getAll());
   } catch (error) {
     res.status(500).send({ message: `Something went wrong: ${error.message}` });
   }
@@ -25,7 +26,7 @@ const getAllBlogs = async (req, res) => {
 const getBlogById = async (req, res) => {
   const { blogId } = req.params;
   try {
-    const blog = await Blog.findById(blogId);
+    const blog = await BlogServiceInstance.getById(blogId);
     if (blog) return res.send(blog);
     res.status(404).send({ message: `Blog with id: ${blogId} not found` });
   } catch (error) {
@@ -36,10 +37,7 @@ const getBlogById = async (req, res) => {
 const updateBlogById = async (req, res) => {
   const { blogId } = req.params;
   try {
-    const updatedBlog = await Blog.findByIdAndUpdate(blogId, req.body, {
-      new: true,
-      // returnDocument: "after",
-    });
+    const updatedBlog = await BlogServiceInstance.updateById(blogId, req.body);
     if (!updatedBlog)
       return res
         .status(404)
@@ -53,7 +51,7 @@ const updateBlogById = async (req, res) => {
 const deleteBlogById = async (req, res) => {
   try {
     const { blogId } = req.params;
-    const deletedBlog = await Blog.findByIdAndDelete(blogId);
+    const deletedBlog = await BlogServiceInstance.deleteById(blogId);
     if (!deletedBlog)
       return res
         .status(404)
@@ -65,10 +63,20 @@ const deleteBlogById = async (req, res) => {
   }
 };
 
+const searchBlogs = async (req, res) => {
+  const { title, author } = req.query;
+  if (title || author)
+    return res.send(await BlogServiceInstance.search(title, author));
+  res.status(400).send({
+    message: "Please provide either title or author as query parameter",
+  });
+};
+
 module.exports = {
   createNewBlog,
   getAllBlogs,
   getBlogById,
   updateBlogById,
   deleteBlogById,
+  searchBlogs,
 };
